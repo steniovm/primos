@@ -83,9 +83,11 @@ table{
     </head>
     <body>
         <h1>Gerador de números primos online</h1>
-        <p>A cada acesso alguns novos números primos são gerado, a pagina é atualizada a cada minuto.</p>
+        <p>A cada acesso alguns novos números primos são gerados.</p>
+        <p>A pagina é atualizada a cada minuto.</p>
+        <p>Se ficar muito tempo sem nenhum acesso a contagem é reiniciada.</p>
         <main>
-            <label>A geração iniciou em: <b id="initialdate">22/09/2023 15:00:00</b></label>
+            <label>A geração iniciou em: <b id="initialdate"></b></label>
             <section id="master">
                 O <b id="contnumber">1</b> número primo é o <b id="numberp">1</b>
             </section>
@@ -93,16 +95,16 @@ table{
                 <h2>Ver outros números</h2>
                 <div>
                     <label>Da posição</label>
-                    <input id="inminpos" type="number" min="1" max="1000" value="1"/>
+                    <input id="inminpos" type="number" min="1" max="1" value="1"/>
                     <label>à</label>
-                    <input id="inmaxpos" type="number" min="1" max="1000" value="1000"/>
+                    <input id="inmaxpos" type="number" min="1" max="1" value="1"/>
                     <input id="inpos" type="button" value="Ver"/>
                 </div>
                 <div>
                     <label>Do valor</label>
-                    <input id="inminval" type="number" min="1" max="1000" value="1"/>
+                    <input id="inminval" type="number" min="1" max="1" value="1"/>
                     <label>ao</label>
-                    <input id="inmaxval" type="number" min="1" max="1000" value="1000"/>
+                    <input id="inmaxval" type="number" min="1" max="1" value="1"/>
                     <input id="inval" type="button" value="Ver"/>
                 </div>
             </section>
