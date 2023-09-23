@@ -21,7 +21,7 @@ let interval = setInterval(requestLastNamber,60000);
 async function requestInitialDate(){
     let timeset = new Date();
     let timestring = '';
-    await fetch("inittime")
+    await fetch("../inittime")
     .then(response => response.json())
     .then(value =>{
         timeset.setTime(value.timeinit);
@@ -35,7 +35,7 @@ async function requestInitialDate(){
 
 //requicisão do ultimo número primo encontrado
 function requestLastNamber(){
-    fetch("lastnumber")
+    fetch("../lastnumber")
     .then(response => response.json())
     .then(values =>{
         contnumber.innerHTML =values.lastposit+'º';
@@ -70,7 +70,7 @@ function calcinputs(ipos, ival){
 
 //requicita intervalo de posições
 function requestinpos(){
-    fetch(`inpos?min=${inminpos.value}&max=${inmaxpos.value}`)
+    fetch(`../inpos?min=${inminpos.value}&max=${inmaxpos.value}`)
     .then(response => response.json())
     .then(values =>{
         if (values.overfow){
@@ -87,7 +87,7 @@ function requestinpos(){
 }
 //requicita intervalo de valores
 function requestinval(){
-    fetch(`inval?min=${inminval.value}&max=${inmaxval.value}`)
+    fetch(`../inval?min=${inminval.value}&max=${inmaxval.value}`)
     .then(response => response.json())
     .then(values =>{
         if (values.overfow){
