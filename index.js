@@ -12,7 +12,11 @@ const nmax = process.env.NMAX || 100;
 const app = express();
 
 //configura para servir arquivos estáticos do front
-app.use('/',express.static('./'+directory));
+//app.use('/',express.static('./'+directory));
+app.use('/primos',express.static('./'+directory));
+app.get('/',(req,res)=>{
+    res.send('<html><script>window.location.assign("./primos");</script></html>'); 
+ });
 
 //constantes do software
 const timeinit = Date.now();
@@ -97,14 +101,14 @@ function intvfilter(intv){
 }
 
 //resgata o time inicial do processamento
-app.get("/inittime", (req, res) => {
+app.get("/primos/inittime", (req, res) => {
     //console.log("initTime: "+timeinit);
     res.send({'timeinit':timeinit});
     return true;
 });
 
 //resgata o ultimo número primo processado
-app.get("/lastnumber", (req,res) => {
+app.get("/primos/lastnumber", (req,res) => {
     res.send({
         'lastposit':primos.length,
         'lastnumber':primos[primos.length-1]
@@ -113,7 +117,7 @@ app.get("/lastnumber", (req,res) => {
 });
 
 //resgata intervalo de numeros primos de acordo com a posição
-app.get("/inpos", (req,res) => {
+app.get("/primos/inpos", (req,res) => {
     let intv = {'min': req.query.min, 'max': req.query.max};
     if (intpvalid(intv)){
         res.send(intpfilter(intv));
@@ -125,7 +129,7 @@ app.get("/inpos", (req,res) => {
 });
 
 //resgata intervalo de numeros primos de acordo com o valor
-app.get("/inval", (req,res) => {
+app.get("/primos/inval", (req,res) => {
     let intv = {'min': req.query.min, 'max': req.query.max};
     if (intvvalid(intv)){
         res.send(intvfilter(intv));
