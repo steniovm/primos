@@ -83,7 +83,7 @@ table{
     </head>
     <body>
         <h1>Gerador de números primos online</h1>
-        <p>A cada segundo um novo número primo é gerado, a pagina é atualizada a cada minuto.</p>
+        <p>A cada acesso alguns novos números primos são gerado, a pagina é atualizada a cada minuto.</p>
         <main>
             <label>A geração iniciou em: <b id="initialdate">22/09/2023 15:00:00</b></label>
             <section id="master">
@@ -144,7 +144,7 @@ requestInitialDate();
 requestLastNamber();
 
 //atualiza numero a cada minuto
-let interval = setInterval(requestLastNamber,60000);
+let interval = setInterval(requestLastNamber,30000);
 
 //requicisão da data de inicio do processamento
 async function requestInitialDate(){
@@ -266,7 +266,7 @@ app.get('/',(req,res)=>{
  });
 
 //constantes do software
-const timeinit = Date.now();
+let timeinit = Date.now();
 
 //algoritimo de calculo dos numeros primos
 //const tmax = 1000;//tempo maximo de processamento 1 segundo
@@ -278,6 +278,7 @@ let time = 0;
 let timei = 0;
 async function addprimo(){
     let interval = setInterval(()=>{
+        if (primos.length===2) timeinit = Date.now();
         testen = true;
         while(testen){
             timei = Date.now();
@@ -296,7 +297,7 @@ async function addprimo(){
             teste = true;
             lastnumber++;
         }
-    },1000);
+    },100);
 }
 //inicializa algoritimo
 addprimo();
