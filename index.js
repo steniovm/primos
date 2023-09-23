@@ -96,7 +96,7 @@ function intvfilter(intv){
 const app = express();
 
 //configura para servir arquivos estáticos do front
-app.use(express.static('./'+directory));
+app.use('/',express.static('./'+directory));
 
 //resgata o time inicial do processamento
 app.get("/inittime", (req, res) => {
