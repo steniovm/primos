@@ -5,7 +5,7 @@ dotenv.config();
 //Leitura de variaveis de ambiente
 //porta de comunicação da pagina e diretório do front
 const port = process.env.PORT || 80;
-const directory = process.env.DIRECTORY || "Front";
+const directory = process.env.DIRECTORY || "front";
 const nmax = process.env.NMAX || 100;
 
 //constantes do software
