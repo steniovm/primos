@@ -8,6 +8,13 @@ const port = process.env.PORT || 80;
 const directory = process.env.DIRECTORY || "front";
 const nmax = process.env.NMAX || 100;
 
+//app servidor da pagina
+const app = express();
+
+//configura para servir arquivos estáticos do front
+app.use('/',express.static('./'+directory));
+app.get('/',express.static('./'+directory));
+
 //constantes do software
 const timeinit = Date.now();
 
@@ -89,14 +96,6 @@ function intvfilter(intv){
         return {'overfow':nmax};
     }
 }
-
-
-
-//app servidor da pagina
-const app = express();
-
-//configura para servir arquivos estáticos do front
-app.use('/',express.static('./'+directory));
 
 //resgata o time inicial do processamento
 app.get("/inittime", (req, res) => {
