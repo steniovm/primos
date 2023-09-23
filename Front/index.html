@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta property="og:title" content="Numeros primos" />
+        <meta property="og:description" content="Gera um novo numero primo a cada segundo" />
+        <meta property="og:locale" content="pt-br" />
+        <meta property="description" content="Gera um novo numero primo a cada segundo" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Gera um novo número primo a cada segundo</title>
+    </head>
+    <body>
+        <h1>Gerador de números primos online</h1>
+        <p>A cada segundo um novo número primo é gerado, a pagina é atualizada a cada minuto.</p>
+        <main>
+            <label>A geração iniciou em: <b id="initialdate">22/09/2023 15:00:00</b></label>
+            <section id="master">
+                O <b id="contnumber">1</b> número primo é o <b id="numberp">1</b>
+            </section>
+            <section>
+                <h2>Ver outros números</h2>
+                <div>
+                    <label>Da posição</label>
+                    <input id="inminpos" type="number" min="1" max="1000" value="1"/>
+                    <label>à</label>
+                    <input id="inmaxpos" type="number" min="1" max="1000" value="1000"/>
+                    <input id="inpos" type="button" value="Ver"/>
+                </div>
+                <div>
+                    <label>Do valor</label>
+                    <input id="inminval" type="number" min="1" max="1000" value="1"/>
+                    <label>ao</label>
+                    <input id="inmaxval" type="number" min="1" max="1000" value="1000"/>
+                    <input id="inval" type="button" value="Ver"/>
+                </div>
+            </section>
+            <section id="sectable">
+                <table id="numberList"></table>
+            </section>
+        </main>
+        <footer>
+            <div id="divinfo" class="divinfo">
+                <span>Autor:</span>
+                <span>Stênio Vinicios de Medeiros</span>
+                <span>Portifolio: <a href="https://steniovm.github.io/steniovm/"  alt="Meu portifolio de projetos">https://steniovm.github.io/steniovm/</a></span>
+                <span>Email: <a href="mailto:steniovm@gmail.com"  alt="Meu email">steniovm@gmail.com</a></span>
+            </div>
+        </footer>
+        <div style="height: 20px; margin: auto;">
+            <img src="https://scisimulab.com.br/logo.svg" alt="logo SciSimuLab" style="height: 20px;"/>
+            <b>Conheça também
+                <a href="https://scisimulab.com.br/" target="_blank">
+                    <i>Sci Simu Lab</i>
+                </a>
+            </b>
+        </div>
+        <script type="text/javascript" src="scripts.js"></script>
+    </body>
+</html>
