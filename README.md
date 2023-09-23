@@ -12,7 +12,7 @@ A data e horario de inicio de Geração corresponde ao momento em que o servidor
 Exemplo:<br/>
 vetor<br/>
 [ 1 , 2 , 3 , 5 , 7 ,...]<br/>
-_ 1º, 2º, 3º, 4º, 5º,...<br/>
+ 1º, 2º, 3º, 4º, 5º,...<br/>
 posições<br/>
 </p>
 
