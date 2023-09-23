@@ -12,8 +12,8 @@ const nmax = process.env.NMAX || 100;
 const app = express();
 
 //configura para servir arquivos estáticos do front
-app.use('/',express.static('./'+directory));
-app.get('/',express.static('./'+directory));
+app.use('',express.static('./'+directory));
+app.get('',express.static('./'+directory));
 
 //constantes do software
 const timeinit = Date.now();
