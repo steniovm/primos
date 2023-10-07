@@ -5,9 +5,9 @@ const page = `
     <head>
         <meta charset="utf-8" />
         <meta property="og:title" content="Numeros primos" />
-        <meta property="og:description" content="Gera novos números primos a cada acesso" />
+        <meta property="og:description" content="Gera um novo numero primo a cada segundo" />
         <meta property="og:locale" content="pt-br" />
-        <meta property="description" content="Gera novos números primos a cada acesso" />
+        <meta property="description" content="Gera um novo numero primo a cada segundo" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <style>
 :root {
@@ -79,12 +79,13 @@ table{
     border-radius: 1em;
 }
         </style>
-        <title>Gera novos números primos a cada acesso</title>
+        <title>Gera um novo número primo a cada segundo</title>
     </head>
     <body>
         <h1>Gerador de números primos online</h1>
         <p>A cada acesso alguns novos números primos são gerados.</p>
         <p>A pagina é atualizada a cada minuto.</p>
+        <p>Se ficar muito tempo sem nenhum acesso a contagem é reiniciada.</p>
         <main>
             <label>A geração iniciou em: <b id="initialdate"></b></label>
             <section id="master">
@@ -144,8 +145,8 @@ const numberList = document.getElementById('numberList');
 requestInitialDate();
 requestLastNamber();
 
-//atualiza numero a cada 10 segundos
-let interval = setInterval(requestLastNamber,10000);
+//atualiza numero a cada minuto
+let interval = setInterval(requestLastNamber,30000);
 
 //requicisão da data de inicio do processamento
 async function requestInitialDate(){
@@ -248,8 +249,6 @@ inval.addEventListener('click',requestinval);
 `;
 //modulos externos (padrão node modules)
 const express = require('express');
-const fs = require('fs');
-const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
 //Leitura de variaveis de ambiente
@@ -263,29 +262,29 @@ const app = express();
 
 //configura para servir arquivos estáticos do front
 //app.use('/',express.static('./'+directory));
-app.use(cors());
 app.use('/primos',express.static('./'+directory));
 app.get('/',(req,res)=>{
     res.send(page); 
  });
 
 //constantes do software
-const tinit = require('./dateinit.json');
-let timeinit = tinit || Date.now();
-if (!tinit) 
-    fs.writeFile('./dateinit.json', JSON.stringify(timeinit), 'utf8', err=>{if(err)console.log(err)});
+let timeinit = Date.now();
 
 //algoritimo de calculo dos numeros primos
-let primos = require('./primos.json');
-const nciclo = Math.ceil(Math.random()*1000);//a cada acesso entre 1 e 1000 novos números são gerados
+//const tmax = 1000;//tempo maximo de processamento 1 segundo
+let primos = [1,2];
 let teste = true;
 let testen = true;
-let lastnumber = primos[primos.length-1]+1;
-function addprimo(){
-    for(y=0;y<nciclo;y++){
+let lastnumber = 3;
+let time = 0;
+let timei = 0;
+async function addprimo(){
+    let interval = setInterval(()=>{
+        if (primos.length===2) timeinit = Date.now();
         testen = true;
         while(testen){
-            testen = false;
+            timei = Date.now();
+            testen = false
             for(i=1;i<primos.length && teste;i++){
                 if (lastnumber%primos[i]===0){
                     teste = false;
@@ -293,16 +292,18 @@ function addprimo(){
                 }
             }
             if (teste){
+                time = Date.now()-timei;
                 primos.push(lastnumber);
                 testen = false;
             }
             teste = true;
             lastnumber++;
         }
-    }
-    console.log(primos.length);
-    fs.writeFile('./primos.json', JSON.stringify(primos), 'utf8', err=>{if(err)console.log(err)});
+    },100);
 }
+//inicializa algoritimo
+addprimo();
+
 function intpvalid(intv){
     if (
         intv.min<=intv.max &&
@@ -352,16 +353,12 @@ function intvfilter(intv){
 //resgata o time inicial do processamento
 app.get("/inittime", (req, res) => {
     //console.log("initTime: "+timeinit);
-    //inicializa algoritimo
-    addprimo();
     res.send({'timeinit':timeinit});
     return true;
 });
 
 //resgata o ultimo número primo processado
 app.get("/lastnumber", (req,res) => {
-    //inicializa algoritimo
-    addprimo();
     res.send({
         'lastposit':primos.length,
         'lastnumber':primos[primos.length-1]
