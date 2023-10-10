@@ -15,7 +15,7 @@ requestInitialDate();
 requestLastNamber();
 
 //atualiza numero a cada minuto
-let interval = setInterval(requestLastNamber,60000);
+let interval = setInterval(requestLastNamber,30000);
 
 //requicisão da data de inicio do processamento
 async function requestInitialDate(){
@@ -25,7 +25,7 @@ async function requestInitialDate(){
     .then(response => response.json())
     .then(value =>{
         timeset.setTime(value.timeinit);
-        timestring = `${timeset.getDay()}/${timeset.getMonth()}/${timeset.getFullYear()} - ${timeset.getHours()}:${timeset.getMinutes()}:${timeset.getSeconds()}`
+        timestring = `${timeset.getDate()}/${timeset.getMonth()+1}/${timeset.getFullYear()} - ${timeset.getHours()}:${timeset.getMinutes()}:${timeset.getSeconds()}`
     })
     .catch(error => {
         console.log('Erro ao carregar resposta:', error);
